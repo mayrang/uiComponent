@@ -1,3 +1,7 @@
+import Test1 from "./components/test1";
+import React from "./components/test2/React";
+import Vanilla from "./components/test2/Vanilla";
+
 export const routePaths = ["/", "/test1", "/test2", "/test2/vanilla", "/test2/react"] as const;
 
 export type ROUTE_PATH = (typeof routePaths)[number];
@@ -29,7 +33,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/test1",
     link: "/test1",
     name: "test1",
-    children: null,
+    children: Test1,
   },
   "/test2": {
     key: "/test2",
@@ -41,13 +45,13 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/test2/vanilla",
     link: "/test2/vanilla",
     name: "vanilla",
-    children: null,
+    children: Vanilla,
   },
   "/test2/react": {
     key: "/test2/react",
     link: "/test2/react",
     name: "react",
-    children: null,
+    children: React,
   },
 };
 

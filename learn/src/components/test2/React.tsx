@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
-export default function react() {
+export default function React() {
   const [show, toggle] = useState(false);
   return (
     <div>

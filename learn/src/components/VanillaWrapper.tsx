@@ -7,7 +7,7 @@ export default function VanillaWrapper({ initiator }: { initiator: (wrapper: HTM
   useEffect(() => {
     if (divRef?.current && !initRef?.current) {
       initiator(divRef.current);
-      initRef.current = false;
+      initRef.current = true;
     }
   }, [initiator]);
   return <div ref={divRef} />;
