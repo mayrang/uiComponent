@@ -3,6 +3,7 @@ import cx from "./cx";
 import Accordions1 from "./1_";
 import Accordions2 from "./2_";
 import Accordions3 from "./3_";
+import Accordions4 from "./4_v";
 
 export default function Accordions() {
   return (
@@ -11,6 +12,7 @@ export default function Accordions() {
       <Accordions1 />
       <Accordions2 />
       <Accordions3 />
+      <Accordions4 />
     </div>
   );
 }
