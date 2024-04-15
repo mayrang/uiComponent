@@ -64,4 +64,33 @@
       border-bottom-width: 1px;
     }
   }
+
+  .item5 {
+    overflow: hidden;
+    input {
+      display: none;
+    }
+    .tab {
+      display: block;
+    }
+    .description {
+      padding: 0 15px;
+      border-bottom-width: 0;
+      max-height: 0;
+      transition: ease 0.3s;
+    }
+    input:checked {
+      ~ .description {
+        padding: 15px;
+        max-height: 100dvh;
+        border-bottom-width: 1px;
+      }
+      + .tab {
+        background-color: #ace;
+        &::before {
+          content: "-";
+        }
+      }
+    }
+  }
 }

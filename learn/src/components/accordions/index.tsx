@@ -4,6 +4,7 @@ import Accordions1 from "./1_";
 import Accordions2 from "./2_";
 import Accordions3 from "./3_";
 import Accordions4 from "./4_v";
+import Accordions5 from "./5_";
 
 export default function Accordions() {
   return (
@@ -13,6 +14,7 @@ export default function Accordions() {
       <Accordions2 />
       <Accordions3 />
       <Accordions4 />
+      <Accordions5 />
     </div>
   );
 }
