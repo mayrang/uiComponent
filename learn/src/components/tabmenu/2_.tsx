@@ -41,7 +41,9 @@ export default function TabMenu2() {
           ))}
         </ul>
         {data.map((item) => (
-          <div className={cx("description", { current: item.id === currentId })}>{item.description}</div>
+          <div key={item.id} className={cx("description", { current: item.id === currentId })}>
+            {item.description}
+          </div>
         ))}
       </div>
     </>
