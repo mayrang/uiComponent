@@ -30,4 +30,13 @@
   .description {
     padding: 0 15px 15px;
   }
+
+  .tabmenu2 {
+    .description {
+      display: none;
+      &.current {
+        display: block;
+      }
+    }
+  }
 }
