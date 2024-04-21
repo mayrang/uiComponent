@@ -3,6 +3,7 @@ import cx from "./cx";
 import TabMenu1 from "./1_";
 import TabMenu2 from "./2_";
 import Tabmenu3 from "./3_";
+import TabMenu4 from "./4_v";
 
 export default function TabMenu() {
   return (
@@ -11,6 +12,7 @@ export default function TabMenu() {
       <TabMenu1 />
       <TabMenu2 />
       <Tabmenu3 />
+      <TabMenu4 />
     </div>
   );
 }
