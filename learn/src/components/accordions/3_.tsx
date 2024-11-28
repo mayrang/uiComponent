@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import cx from "./cx";
+import { useState } from "react";
 import data from "./data";
+import cx from "./cx";
 
 const AccordionItem = ({
   id,
   title,
   description,
-  toggle,
   current,
+  onClick,
 }: {
   id: string;
   title: string;
   description: string;
-  toggle: () => void;
   current: boolean;
+  onClick: () => void;
 }) => {
   return (
-    <li className={cx("item", "item3", { current })}>
-      <div onClick={toggle} className={cx("tab")}>
+    <li className={cx("item3", "item", { current })}>
+      <div className={cx("tab")} onClick={onClick}>
         {title}
       </div>
       <div className={cx("description")}>{description}</div>
@@ -25,29 +25,27 @@ const AccordionItem = ({
   );
 };
 
-export default function Accordions3() {
-  const [currentId, setCurrentId] = useState<string | null>(null);
+export default function Accordion3() {
+  const [currentId, setCurrentId] = useState(data[0].id);
 
-  const toggle = (id: string) => () => {
-    setCurrentId((prev) => (prev === id ? null : id));
+  const toggleItem = (id: string) => () => {
+    setCurrentId(id);
   };
   return (
-    <>
-      <h3>
-        #3. React <sub>css animation</sub>
-      </h3>
+    <div>
+      <h1>
+        #3. React <sub>css transition</sub>
+      </h1>
       <ul className={cx("container")}>
-        {data.map(({ id, title, description }) => (
+        {data.map((item) => (
           <AccordionItem
-            key={id}
-            id={id}
-            title={title}
-            current={currentId === id}
-            description={description}
-            toggle={toggle(id)}
+            key={item.id}
+            current={currentId === item.id}
+            onClick={toggleItem(item.id)}
+            {...item}
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 }

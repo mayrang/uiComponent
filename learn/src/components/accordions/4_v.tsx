@@ -1,67 +1,64 @@
-import React, { useState } from "react";
+import VanillaWrapper from "../VanillaWrapper";
 import cx from "./cx";
 import data from "./data";
-import VanillaWrapper from "../VanillaWrapper";
 
-const itemBuilder = ({ id, title, description }: { id: string; title: string; description: string }) => {
+const itemBuilder = ({
+  id,
+  title,
+  description,
+}: {
+  id: string;
+  title: string;
+  description: string;
+}) => {
   const $li = document.createElement("li");
+  $li.setAttribute("data-id", id);
   $li.classList.add(cx("item"), cx("item3"));
+
   const $tab = document.createElement("div");
   $tab.classList.add(cx("tab"));
   $tab.textContent = title;
+
   const $description = document.createElement("div");
   $description.classList.add(cx("description"));
   $description.textContent = description;
 
-  $li.setAttribute("data-id", id);
-
   $li.append($tab, $description);
 
   return $li;
-
-  // return (
-  //   <li className={cx("item", "item3", { current })}>
-  //     <div onClick={toggle} className={cx("tab")}>
-  //       {title}
-  //     </div>
-  //     <div className={cx("description")}>{description}</div>
-  //   </li>
-  // );
 };
 
-const initiator = (wrapper: HTMLDivElement) => {
-  let currentId = null as null | string;
+const initiator = (ref: HTMLDivElement) => {
+  let currentId: string | null = null;
   const $ul = document.createElement("ul");
+  const $div = document.createElement("div");
+  const $h2 = document.createElement("h2");
+  const $sub = document.createElement("sub");
+  $h2.textContent = "#4 React";
+  $sub.textContent = "vanilla javascript";
+  $h2.appendChild($sub);
+  $div.append($h2, $ul);
   $ul.classList.add(cx("container"));
-  const $items = data.map(itemBuilder);
-  $ul.append(...$items);
 
-  const clickToggle = (e: Event) => {
-    const $el = e.target as HTMLDivElement;
+  const $items = data.map(itemBuilder) as HTMLLIElement[];
 
-    if (!$el.classList.contains(cx("tab"))) return;
-    const targetId = $el.parentElement!.dataset.id;
+  $ul.addEventListener("click", (e: Event) => {
+    const $target = e.target as HTMLElement;
+    const id = $target.parentElement?.dataset.id;
+    if (!id) return;
 
-    if (!targetId) return;
-    currentId = targetId === currentId ? null : targetId;
+    currentId = currentId === id ? null : id;
 
-    $items.forEach(($item) => {
-      const id = $item.dataset.id;
-      $item.classList.toggle(cx("current"), currentId === id);
+    $items.forEach((item) => {
+      item.classList.toggle(cx("current"), currentId === item.dataset.id);
     });
-  };
+  });
 
-  $ul.addEventListener("click", clickToggle);
-
+  $ul.append(...$items);
   ($items[0].children[0] as HTMLDivElement).click();
-  wrapper.append($ul);
+  ref.append($div);
 };
 
-export default function Accordions4() {
-  return (
-    <>
-      <h3>#3. Vanilla</h3>
-      <VanillaWrapper initiator={initiator} />
-    </>
-  );
+export default function Accordion4() {
+  return <VanillaWrapper initiator={initiator} />;
 }

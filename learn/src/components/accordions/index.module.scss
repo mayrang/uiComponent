@@ -9,6 +9,7 @@
     width: 100%;
     overflow: hidden;
   }
+
   .tab {
     // 타이틀 영역
     padding: 15px;
@@ -42,6 +43,7 @@
     .description {
       display: none;
     }
+
     &.current {
       .description {
         display: block;
@@ -53,43 +55,47 @@
     overflow: hidden;
     .description {
       padding: 0 15px;
-      border-bottom-width: 0;
+      border-bottom-width: 0px;
       max-height: 0;
-      transition: ease 0.3s;
+      transition: ease 1s;
     }
 
-    &.current .description {
-      padding: 15px;
-      max-height: 100dvh;
-      border-bottom-width: 1px;
+    &.current {
+      .description {
+        padding: 15px;
+        border-bottom-width: 1px;
+        max-height: 300px;
+      }
     }
   }
 
   .item5 {
     overflow: hidden;
-    input {
+    .description {
+      padding: 0 15px;
+      border-bottom-width: 0px;
+      max-height: 0;
+      transition: ease 1s;
+    }
+
+    .input {
       display: none;
     }
     .tab {
       display: block;
     }
-    .description {
-      padding: 0 15px;
-      border-bottom-width: 0;
-      max-height: 0;
-      transition: ease 0.3s;
-    }
-    input:checked {
-      ~ .description {
-        padding: 15px;
-        max-height: 100dvh;
-        border-bottom-width: 1px;
-      }
+
+    .input:checked {
       + .tab {
         background-color: #ace;
         &::before {
           content: "-";
         }
+      }
+      ~ .description {
+        padding: 15px;
+        border-bottom-width: 1px;
+        max-height: 300px;
       }
     }
   }

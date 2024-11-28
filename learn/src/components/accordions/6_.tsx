@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-import cx from "./cx";
+import { useEffect, useRef, useState } from "react";
 import data from "./data";
+import cx from "./cx";
 
 const AccordionItem = ({
   id,
@@ -10,29 +10,34 @@ const AccordionItem = ({
   current,
 }: {
   id: string;
-  title: string;
   description: string;
+  title: string;
   toggle: () => void;
   current: boolean;
 }) => {
-  const divRef = useRef<HTMLDivElement | null>(null);
-  console.log(title, current);
+  const descRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    if (divRef.current) {
-      divRef.current.addEventListener("beforematch", toggle);
+    if (descRef.current) {
+      descRef.current.addEventListener("beforematch", () => {
+        toggle();
+      });
     }
     return () => {
-      divRef.current?.removeEventListener("beforematch", toggle);
+      if (descRef.current)
+        descRef.current.removeEventListener("beforematch", toggle);
     };
   }, [toggle]);
   return (
     <li className={cx("item", "item3", { current })}>
-      <div onClick={toggle} className={cx("tab")}>
+      <div className={cx("tab")} onClick={toggle}>
         {title}
       </div>
       <div
         className={cx("description")}
-        ref={divRef}
+        ref={descRef}
+        // beforematch 사용하려면 이렇게 해야하나봄
+        // 접근성 관련 태그로 요소를 찾을 때까지 숨기는 역할을 한다고 함
         HIDDEN={current ? undefined : "until-found"}
       >
         {description}
@@ -41,27 +46,24 @@ const AccordionItem = ({
   );
 };
 
-export default function Accordions6() {
-  const [currentId, setCurrentId] = useState<string | null>(null);
+export default function Accordion6() {
+  const [currentId, setCurrentId] = useState<null | string>(data[0].id);
 
-  const toggle = (id: string) => () => {
-    console.log(id);
+  const toggleItem = (id: string) => () => {
     setCurrentId((prev) => (prev === id ? null : id));
   };
   return (
     <>
-      <h3>
-        #3. React <sub>ctrl + F</sub>
-      </h3>
+      <h2>
+        #6. React<sub>ctrl + f로 검색 가능하게</sub>
+      </h2>
       <ul className={cx("container")}>
-        {data.map(({ id, title, description }) => (
+        {data.map((item) => (
           <AccordionItem
-            key={id}
-            id={id}
-            title={title}
-            current={currentId === id}
-            description={description}
-            toggle={toggle(id)}
+            current={item.id === currentId}
+            toggle={toggleItem(item.id)}
+            {...item}
+            key={item.id}
           />
         ))}
       </ul>

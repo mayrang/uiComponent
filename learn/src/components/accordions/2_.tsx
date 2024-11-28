@@ -16,7 +16,7 @@ const AccordionItem = ({
   current: boolean;
 }) => {
   return (
-    <li className={cx("item", "item2", { current })}>
+    <li className={cx("item", "item2", current && "current")}>
       <div onClick={toggle} className={cx("tab")}>
         {title}
       </div>
@@ -25,29 +25,29 @@ const AccordionItem = ({
   );
 };
 
-export default function Accordions2() {
-  const [currentId, setCurrentId] = useState<string | null>(null);
+const Accordion = () => {
+  const [currentId, setCurrentId] = useState<null | string>(data[0].id);
 
-  const toggle = (id: string) => () => {
+  const toggleItem = (id: string) => () => {
     setCurrentId((prev) => (prev === id ? null : id));
   };
   return (
     <>
-      <h3>
-        #2. React <sub>css</sub>
-      </h3>
-      <ul className={cx("container")}>
-        {data.map(({ id, title, description }) => (
-          <AccordionItem
-            key={id}
-            id={id}
-            title={title}
-            current={currentId === id}
-            description={description}
-            toggle={toggle(id)}
-          />
-        ))}
-      </ul>
+      <h2>#2. React(css)</h2>
+      <div className={cx("Accordions")}>
+        <ul className={cx("container")}>
+          {data.map((item) => (
+            <AccordionItem
+              current={item.id === currentId}
+              {...item}
+              toggle={toggleItem(item.id)}
+              key={item.id}
+            />
+          ))}
+        </ul>
+      </div>
     </>
   );
-}
+};
+
+export default Accordion;
