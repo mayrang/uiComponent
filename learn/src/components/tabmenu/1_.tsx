@@ -1,46 +1,51 @@
-import React, { useState } from "react";
-import cx from "./cx";
+import { useState } from "react";
 import data from "./data";
+import cx from "./cx";
 
 const TabItem = ({
   id,
   title,
-
-  toggle,
   current,
+  toggle,
 }: {
   id: string;
   title: string;
-
-  toggle: () => void;
   current: boolean;
+  toggle: () => void;
 }) => {
   return (
-    <li className={cx("tab", { current })} onClick={toggle}>
+    <li onClick={toggle} className={cx("tab", { current })}>
       {title}
     </li>
   );
 };
 
 export default function TabMenu1() {
-  const [currentId, setCurrentId] = useState<string | null>(null);
+  const [currentId, setCurrentId] = useState(data[0].id);
 
-  const toggle = (id: string) => () => {
-    setCurrentId((prev) => (prev === id ? null : id));
+  const toggleItem = (id: string) => () => {
+    setCurrentId(id);
   };
-  const currentData = data.find((item) => item.id === currentId)?.description;
+
+  const descriptioin =
+    data.find((item) => item.id === currentId)?.description || "";
   return (
     <>
-      <h3>
-        #1. React <sub>html로 DESCRIPTION 보이게하기</sub>
-      </h3>
+      <h2>
+        #1. React <sub>렌더링</sub>
+      </h2>
       <div className={cx("container")}>
         <ul className={cx("tabList")}>
-          {data.map(({ id, title, description }) => (
-            <TabItem key={id} id={id} title={title} current={currentId === id} toggle={toggle(id)} />
+          {data.map((item) => (
+            <TabItem
+              toggle={toggleItem(item.id)}
+              current={item.id === currentId}
+              key={item.id}
+              {...item}
+            />
           ))}
         </ul>
-        <div className={cx("description")}>{currentData ?? ""}</div>
+        <div className={cx("description")}>{descriptioin}</div>
       </div>
     </>
   );

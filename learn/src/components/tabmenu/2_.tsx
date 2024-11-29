@@ -1,49 +1,64 @@
-import React, { useState } from "react";
-import cx from "./cx";
+import { useState } from "react";
 import data from "./data";
+import cx from "./cx";
 
 const TabItem = ({
   id,
   title,
-
-  toggle,
   current,
+  toggle,
 }: {
   id: string;
   title: string;
-
-  toggle: () => void;
   current: boolean;
+  toggle: () => void;
 }) => {
   return (
-    <li className={cx("tab", { current })} onClick={toggle}>
+    <li onClick={toggle} className={cx("tab", { current })}>
       {title}
     </li>
   );
 };
 
-export default function TabMenu2() {
-  const [currentId, setCurrentId] = useState<string | null>(null);
+const DescriptionItem = ({
+  id,
+  description,
+  current,
+}: {
+  id: string;
+  description: string;
+  current: boolean;
+}) => {
+  return <div className={cx("description", { current })}>{description}</div>;
+};
 
-  const toggle = (id: string) => () => {
-    setCurrentId((prev) => (prev === id ? null : id));
-  };
+export default function TabMenu2() {
+  const [currentId, setCurrentId] = useState(data[0].id);
+
+  const toggleItem = (id: string) => () => [setCurrentId(id)];
 
   return (
     <>
-      <h3>
-        #1. React <sub>다 해놓고 css hidden/block으로 보이게 하기</sub>
-      </h3>
-      <div className={cx("container", "tabmenu2")}>
+      <h2>
+        #2. React <sub>css로 show/hide</sub>
+      </h2>
+      <div className={cx("container", "tab2")}>
         <ul className={cx("tabList")}>
-          {data.map(({ id, title, description }) => (
-            <TabItem key={id} id={id} title={title} current={currentId === id} toggle={toggle(id)} />
+          {data.map((item) => (
+            <TabItem
+              key={item.id}
+              {...item}
+              current={currentId === item.id}
+              toggle={toggleItem(item.id)}
+            />
           ))}
         </ul>
         {data.map((item) => (
-          <div key={item.id} className={cx("description", { current: item.id === currentId })}>
-            {item.description}
-          </div>
+          <DescriptionItem
+            key={item.id}
+            {...item}
+            current={item.id === currentId}
+          />
         ))}
       </div>
     </>

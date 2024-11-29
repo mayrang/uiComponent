@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import cx from "./cx";
+import { useState } from "react";
 import data from "./data";
+import cx from "./cx";
 
 const TabItem = ({
   id,
   title,
   description,
-  toggle,
   current,
+  toggle,
 }: {
   id: string;
   title: string;
   description: string;
-  toggle: () => void;
   current: boolean;
+  toggle: () => void;
 }) => {
   return (
     <li className={cx("item", { current })}>
@@ -25,29 +25,30 @@ const TabItem = ({
   );
 };
 
-export default function Tabmenu3() {
-  const [currentId, setCurrentId] = useState<string | null>(null);
+export default function TabMenu3() {
+  const [currentId, setCurrentId] = useState(data[0].id);
 
-  const toggle = (id: string) => () => {
-    setCurrentId((prev) => (prev === id ? null : id));
+  const toggleItem = (id: string) => () => {
+    setCurrentId(id);
   };
+
   return (
     <>
-      <h3>
-        #3. React <sub>css animation</sub>
-      </h3>
-      <ul className={cx("container", "tabmenu3")}>
-        {data.map(({ id, title, description }) => (
-          <TabItem
-            key={id}
-            id={id}
-            title={title}
-            current={currentId === id}
-            description={description}
-            toggle={toggle(id)}
-          />
-        ))}
-      </ul>
+      <h2>
+        #3. React <sub> 하나의 트리 안에서 관리</sub>
+      </h2>
+      <div className={cx("container")}>
+        <ul className={cx("tabList", "tabMenu3")}>
+          {data.map((item) => (
+            <TabItem
+              toggle={toggleItem(item.id)}
+              key={item.id}
+              current={currentId === item.id}
+              {...item}
+            />
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
