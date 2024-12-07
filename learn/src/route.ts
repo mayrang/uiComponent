@@ -3,6 +3,7 @@ import TabMenu from "./components/tabmenu";
 import Test1 from "./components/test1";
 import React from "./components/test2/React";
 import Vanilla from "./components/test2/Vanilla";
+import TextBox from "./components/textbox";
 import Tooltips from "./components/tooltip";
 
 export const routePaths = [
@@ -14,6 +15,7 @@ export const routePaths = [
   "/accodions",
   "/tabmenu",
   "/tooltips",
+  "/textbox",
 ] as const;
 
 export type ROUTE_PATH = (typeof routePaths)[number];
@@ -39,7 +41,14 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/",
     link: "/",
     name: "root",
-    children: ["/test1", "/test2", "/accodions", "/tabmenu", "/tooltips"],
+    children: [
+      "/test1",
+      "/test2",
+      "/accodions",
+      "/tabmenu",
+      "/tooltips",
+      "/textbox",
+    ],
   },
   "/test1": {
     key: "/test1",
@@ -83,8 +92,17 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     name: "tooltips",
     children: Tooltips,
   },
+  "/textbox": {
+    key: "/textbox",
+    link: "/textbox",
+    name: "textbox",
+    children: TextBox,
+  },
 };
 
-export const isParentRoute = (route: ROUTE): route is ParentRoute => Array.isArray(route.children);
+export const isParentRoute = (route: ROUTE): route is ParentRoute =>
+  Array.isArray(route.children);
 
-export const gnbRootList = (routes["/"] as ParentRoute).children.map((r) => routes[r]);
+export const gnbRootList = (routes["/"] as ParentRoute).children.map(
+  (r) => routes[r]
+);
