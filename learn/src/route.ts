@@ -1,4 +1,5 @@
 import Accordions from "./components/accordions";
+import LineClamp from "./components/lineclamp";
 import TabMenu from "./components/tabmenu";
 import Test1 from "./components/test1";
 import React from "./components/test2/React";
@@ -14,6 +15,7 @@ export const routePaths = [
   "/accodions",
   "/tabmenu",
   "/tooltips",
+  "/lineclamps",
 ] as const;
 
 export type ROUTE_PATH = (typeof routePaths)[number];
@@ -39,7 +41,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/",
     link: "/",
     name: "root",
-    children: ["/test1", "/test2", "/accodions", "/tabmenu", "/tooltips"],
+    children: ["/test1", "/test2", "/accodions", "/tabmenu", "/tooltips", "/lineclamps"],
   },
   "/test1": {
     key: "/test1",
@@ -82,6 +84,12 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     link: "/tooltips",
     name: "tooltips",
     children: Tooltips,
+  },
+  "/lineclamps": {
+    key: "/lineclamps",
+    link: "/lineclamps",
+    name: "lineclamps",
+    children: LineClamp,
   },
 };
 
