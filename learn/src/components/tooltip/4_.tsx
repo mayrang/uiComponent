@@ -10,7 +10,15 @@ const tooltipPosition = {
   right: 0,
 };
 
-const Tooltip = ({ id, description, title }: { id: string; title: string; description: string }) => {
+const Tooltip = ({
+  id,
+  description,
+  title,
+}: {
+  id: string;
+  title: string;
+  description: string;
+}) => {
   const wrapperRef = useRef<HTMLDetailsElement>(null);
   const targetRef = useRef<HTMLDivElement>(null);
   const style = useStyleInView(wrapperRef, targetRef, tooltipPosition);
@@ -43,7 +51,7 @@ export default function Tooltip4() {
   }, []);
   return (
     <>
-      <h3>#3. React viewport</h3>
+      <h3>#4. React viewport</h3>
       {data.map((item) => (
         <Tooltip {...item} key={item.id} />
       ))}

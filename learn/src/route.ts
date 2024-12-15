@@ -4,6 +4,7 @@ import TabMenu from "./components/tabmenu";
 import Test1 from "./components/test1";
 import React from "./components/test2/React";
 import Vanilla from "./components/test2/Vanilla";
+import TextBox from "./components/textbox";
 import Tooltips from "./components/tooltip";
 
 export const routePaths = [
@@ -16,6 +17,7 @@ export const routePaths = [
   "/tabmenu",
   "/tooltips",
   "/lineclamps",
+  "/textbox",
 ] as const;
 
 export type ROUTE_PATH = (typeof routePaths)[number];
@@ -41,7 +43,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/",
     link: "/",
     name: "root",
-    children: ["/test1", "/test2", "/accodions", "/tabmenu", "/tooltips", "/lineclamps"],
+    children: ["/test1", "/test2", "/accodions", "/tabmenu", "/tooltips", "/lineclamps", "/textbox"],
   },
   "/test1": {
     key: "/test1",
@@ -90,6 +92,12 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     link: "/lineclamps",
     name: "lineclamps",
     children: LineClamp,
+  },
+  "/textbox": {
+    key: "/textbox",
+    link: "/textbox",
+    name: "textbox",
+    children: TextBox,
   },
 };
 
