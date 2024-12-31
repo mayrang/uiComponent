@@ -1,0 +1,51 @@
+.LineClamps {
+  .content {
+    position: relative;
+    border: 1px solid #333;
+    padding: 20px;
+    margin-top: 40px;
+  }
+
+  .text {
+    white-space: pre-line;
+    line-height: 1.67;
+  }
+
+  .buttonMore {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    &::before {
+      width: 5px;
+      display: inline-block;
+      content: "";
+      height: 5px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: transparent #333 #333 transparent;
+      transform: rotate(45deg);
+    }
+  }
+
+  .text.clamped {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+
+  .text-clone {
+    line-height: 1.67;
+    white-space: pre-line;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    visibility: hidden;
+    z-index: -9999;
+    opacity: 0;
+  }
+}
