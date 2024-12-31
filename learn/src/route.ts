@@ -1,4 +1,6 @@
 import Accordions from "./components/accordions";
+import LazyLoading1 from "./components/lazyloading/1_r";
+import LazyLoading2 from "./components/lazyloading/1_v";
 import LineClamp from "./components/lineclamp";
 import TabMenu from "./components/tabmenu";
 import Test1 from "./components/test1";
@@ -18,6 +20,9 @@ export const routePaths = [
   "/tooltips",
   "/lineclamps",
   "/textbox",
+  "/lazyloading",
+  "/lazyloading/react",
+  "/lazyloading/vanilla",
 ] as const;
 
 export type ROUTE_PATH = (typeof routePaths)[number];
@@ -43,7 +48,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/",
     link: "/",
     name: "root",
-    children: ["/test1", "/test2", "/accodions", "/tabmenu", "/tooltips", "/lineclamps", "/textbox"],
+    children: ["/test1", "/test2", "/accodions", "/tabmenu", "/tooltips", "/lineclamps", "/textbox", "/lazyloading"],
   },
   "/test1": {
     key: "/test1",
@@ -92,6 +97,24 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     link: "/lineclamps",
     name: "lineclamps",
     children: LineClamp,
+  },
+  "/lazyloading": {
+    key: "/lazyloading",
+    link: "/lazyloading/react",
+    name: "lazyloading",
+    children: ["/lazyloading/react", "/lazyloading/vanilla"],
+  },
+  "/lazyloading/react": {
+    key: "/lazyloading/react",
+    link: "/lazyloading/react",
+    name: "lazyloading/react",
+    children: LazyLoading1,
+  },
+  "/lazyloading/vanilla": {
+    key: "/lazyloading/vanilla",
+    link: "/lazyloading/vanilla",
+    name: "lazyloading/vanilla",
+    children: LazyLoading2,
   },
   "/textbox": {
     key: "/textbox",

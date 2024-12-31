@@ -124,7 +124,7 @@ aside {
     }
     @for $i from 1 to 10 {
       &.items-#{$i} .subRoutes {
-        height: calc(#{$i} * 40px);
+        height: calc(#{$i} * 61px);
       }
     }
     &.parent > a::before {
