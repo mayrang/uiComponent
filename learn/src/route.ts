@@ -1,4 +1,6 @@
 import Accordions from "./components/accordions";
+import InfiniteScroll2 from "./components/infinitescroll/1_j";
+import InfiniteScroll1 from "./components/infinitescroll/1_r";
 import LazyLoading1 from "./components/lazyloading/1_r";
 import LazyLoading2 from "./components/lazyloading/1_v";
 import LineClamp from "./components/lineclamp";
@@ -23,6 +25,9 @@ export const routePaths = [
   "/lazyloading",
   "/lazyloading/react",
   "/lazyloading/vanilla",
+  "/infinitescroll/react",
+  "/infinitescroll",
+  "/infinitescroll/vanilla",
 ] as const;
 
 export type ROUTE_PATH = (typeof routePaths)[number];
@@ -48,7 +53,17 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/",
     link: "/",
     name: "root",
-    children: ["/test1", "/test2", "/accodions", "/tabmenu", "/tooltips", "/lineclamps", "/textbox", "/lazyloading"],
+    children: [
+      "/test1",
+      "/test2",
+      "/accodions",
+      "/tabmenu",
+      "/tooltips",
+      "/lineclamps",
+      "/textbox",
+      "/lazyloading",
+      "/infinitescroll",
+    ],
   },
   "/test1": {
     key: "/test1",
@@ -121,6 +136,24 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     link: "/textbox",
     name: "textbox",
     children: TextBox,
+  },
+  "/infinitescroll": {
+    key: "/infinitescroll",
+    link: "/infinitescroll/react",
+    name: "infinitescroll",
+    children: ["/infinitescroll/react", "/infinitescroll/vanilla"],
+  },
+  "/infinitescroll/react": {
+    key: "/infinitescroll/react",
+    link: "/infinitescroll/react",
+    name: "infinitescroll/react",
+    children: InfiniteScroll1,
+  },
+  "/infinitescroll/vanilla": {
+    key: "/infinitescroll/vanilla",
+    link: "/infinitescroll/vanilla",
+    name: "infinitescroll/vanilla",
+    children: InfiniteScroll2,
   },
 };
 
