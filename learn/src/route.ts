@@ -4,6 +4,8 @@ import InfiniteScroll1 from "./components/infinitescroll/1_r";
 import LazyLoading1 from "./components/lazyloading/1_r";
 import LazyLoading2 from "./components/lazyloading/1_v";
 import LineClamp from "./components/lineclamp";
+import ScrollBox from "./components/scrollbox";
+import ScrollBox1 from "./components/scrollbox/1_r";
 import TabMenu from "./components/tabmenu";
 import Test1 from "./components/test1";
 import React from "./components/test2/React";
@@ -28,6 +30,7 @@ export const routePaths = [
   "/infinitescroll/react",
   "/infinitescroll",
   "/infinitescroll/vanilla",
+  "/scrollbox",
 ] as const;
 
 export type ROUTE_PATH = (typeof routePaths)[number];
@@ -63,6 +66,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
       "/textbox",
       "/lazyloading",
       "/infinitescroll",
+      "/scrollbox",
     ],
   },
   "/test1": {
@@ -136,6 +140,12 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     link: "/textbox",
     name: "textbox",
     children: TextBox,
+  },
+  "/scrollbox": {
+    key: "/scrollbox",
+    link: "/scrollbox",
+    name: "scrollbox",
+    children: ScrollBox,
   },
   "/infinitescroll": {
     key: "/infinitescroll",

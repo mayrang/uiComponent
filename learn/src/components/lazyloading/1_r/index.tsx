@@ -7,11 +7,10 @@ const intersectOptions: IntersectionObserverInit = {
   threshold: 0,
 };
 
-const LazyLoadingImg = ({ src, width, height }: { src: string; width: number; height: number }) => {
+export const LazyLoadingImg = ({ src, width, height }: { src: string; width: number; height: number }) => {
   const [isLazy, setIsLazy] = useState(false);
   const imageRef = useRef<HTMLImageElement>(null);
   const { entries, observerRef } = useIntersectionObserver(imageRef, intersectOptions);
-
   const onLoad = () => {
     setIsLazy(true);
   };

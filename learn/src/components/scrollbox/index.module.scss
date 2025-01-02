@@ -1,0 +1,98 @@
+.scrollbox {
+  position: relative;
+  margin: 20px;
+  .list {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 5px;
+    display: none;
+    outline: none;
+
+    &.on {
+      display: block;
+      opacity: 0.4;
+      transition: opacity 0.4 ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 12px;
+      background-color: #fff;
+    }
+    &::before {
+      top: calc(50% - 10px);
+    }
+    &::after {
+      top: calc(50% + 2px);
+    }
+
+    &.prev {
+      left: 0;
+      &::before {
+        left: 13px;
+        transform-origin: 0 100%;
+        rotate: 30deg;
+      }
+      &::after {
+        left: 13px;
+        transform-origin: 0 0;
+        rotate: -30deg;
+      }
+    }
+    &.next {
+      right: 0;
+      &::before {
+        right: 13px;
+        top: calc(50% - 10px);
+        transform-origin: 100% 100%;
+        rotate: -30deg;
+      }
+      &::after {
+        right: 13px;
+        top: calc(50% + 2px);
+        transform-origin: 100% 0;
+        rotate: 30deg;
+      }
+    }
+  }
+
+  .observer {
+    flex: 0 0 1px;
+    margin-right: -1px;
+  }
+
+  .item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 10px;
+
+    img {
+      border-radius: 5px;
+    }
+
+    div {
+      margin-top: 10px;
+    }
+  }
+}

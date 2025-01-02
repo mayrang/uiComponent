@@ -4,16 +4,19 @@ import Tooltip3 from "./3_";
 import Tooltip4 from "./4_";
 import Tooltip5 from "./5_";
 import { cx } from "./cx";
+import ViewportContextProvider from "./ViewportContext";
 
 export default function Tooltips() {
   return (
     <div className={cx("Tooltips")}>
       <h1>Tooltip</h1>
-      <Tooltip1 />
-      <Tooltip2 />
-      <Tooltip3 />
-      <Tooltip4 />
-      <Tooltip5 />
+      <ViewportContextProvider>
+        <Tooltip1 />
+        <Tooltip2 />
+        <Tooltip3 />
+        <Tooltip4 />
+        <Tooltip5 />
+      </ViewportContextProvider>
     </div>
   );
 }

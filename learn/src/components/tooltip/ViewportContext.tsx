@@ -20,10 +20,12 @@ const getViewportRect = () => {
   let stored: Rect = defaultRect;
   return () => {
     const elem = typeof document !== "undefined" && document.scrollingElement;
+
     if (!elem) return stored;
 
     const { top, left, height, width } = elem.getBoundingClientRect();
     const newRect = { left, top, width, height, scrollHeight: elem.scrollHeight };
+
     if (newRect && !isSameRect(stored, newRect)) stored = newRect;
     return stored;
   };
@@ -43,6 +45,7 @@ const viewportContext = createContext<Rect>(defaultRect);
 
 export default function ViewportContextProvider({ children }: { children: React.ReactNode }) {
   const viewport = useSyncExternalStore(subscribe, getViewportRect());
+
   return <viewportContext.Provider value={viewport}>{children}</viewportContext.Provider>;
 }
 
