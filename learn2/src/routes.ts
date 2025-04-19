@@ -16,18 +16,16 @@
 //   },
 // ];
 
+import Test1 from "./components/test1";
+import Test2 from "./components/test2";
+import Test2Vanilla from "./components/test2/vanilla";
+
 // 그래서 객체 방식 사용
 
 // as const : const assertion 원래 상수가 아닌 것을 상수인 것으로 선언해주는 기능
 /// 할당된 값 자체를 type으로 추론하는 (Literal Type) 좀 더 타입을 구체화 하고 싶을 때 약간 enum 처럼 사용하고 싶을 때
 //  readonly ["/", "/test1`", "/test2", "/test2/vanilla", "/test2/react"]
-const routePaths = [
-  "/",
-  "/test1",
-  "/test2",
-  "/test2/vanilla",
-  "/test2/react",
-] as const;
+const routePaths = ["/", "/test1", "/test2", "/test2/vanilla", "/test2/react"] as const;
 // readonly ["/", "/test1`", "/test2", "/test2/vanilla", "/test2/react"] 이것 중 하나의 타입으로 온다
 // '/' | '/test1' ...
 export type ROUTE_PATH = (typeof routePaths)[number];
@@ -41,7 +39,7 @@ export type ParentRoute = BaseRoute & {
   children: ROUTE_PATH[];
 };
 export type ChildRoute = BaseRoute & {
-  children: ((props: unknown) => JSX.Element) | null;
+  children: ((props: unknown) => React.ReactNode) | null;
 };
 export type ROUTE = ParentRoute | ChildRoute;
 
@@ -61,7 +59,7 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/test1",
     link: "/test1",
     name: "테스트1",
-    children: null,
+    children: Test1,
   },
   "/test2": {
     key: "/test2",
@@ -73,13 +71,13 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
     key: "/test2/vanilla",
     link: "/test2/vanilla",
     name: "Vanilla",
-    children: null,
+    children: Test2Vanilla,
   },
   "/test2/react": {
     key: "/test2/react",
     link: "/test2/react",
     name: "react",
-    children: null,
+    children: Test2,
   },
 };
 
@@ -87,9 +85,6 @@ export const routes: Record<ROUTE_PATH, ROUTE> = {
 // is -> 해당 함수의 return 값이 true이면 이 함수를 호출한 범위 내에서 결과 타입을 좁힘
 // 여기서는 해당 반환 함수가 참이면 호출한 곳에서 route를 ParentRoute 타입으로 좁히게 됨 (이건 컴파일 단계에서만 사용됨)
 // as -> 컴파일 단계에서 타입 검사를 할 때 타입스크립트가 감지하지 못하는 애매한 타입 요소들을 직접 명시
-export const isParentRoute = (route: ROUTE): route is ParentRoute =>
-  Array.isArray(route.children);
+export const isParentRoute = (route: ROUTE): route is ParentRoute => Array.isArray(route.children);
 
-export const gnbRootList = (routes["/"] as ParentRoute).children.map(
-  (r) => routes[r]
-);
+export const gnbRootList = (routes["/"] as ParentRoute).children.map((r) => routes[r]);
